@@ -30,4 +30,4 @@
            05  CSTOUT_DATA_3            FIXED BIN(31),
      /*    05  CSTOUT_DATA_4            PIC '(05)X',  */
            05  CSTOUT_DATA_4            FIXED DEC(5,0),
-           05  CSTOUT_DATA_5            PIC '(05)X';
+           05  CSTOUT_DATA_5            PIC '(05)X';
