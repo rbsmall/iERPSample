@@ -1,0 +1,64 @@
+1%DCL  BDMX01T  ENTRY;
+ /*********************************************************************/
+ /* PL/1 preprocessor function BDMX01T                                */
+ /* Used to generate the component, program name, release and         */
+ /* compile timestamp in the load module.                             */
+ /*********************************************************************/
+ %INCLUDE DAIFPLH;
+ %BDMX01T:
+ PROCEDURE(NAME,PGMNAME) RETURNS(CHAR);
+ DCL  NAME    CHAR;                    /* component name              */
+ DCL  PGMNAME CHAR;                    /* program name                */
+
+ DCL  FILL    CHAR;                    /* used to fill up one line    */
+ DCL  ASSM    CHAR;                    /* next output line            */
+ DCL  CCTR    FIXED;                   /* length of next output line  */
+ DCL  CODE    CHAR;                    /* generated code              */
+ DCL  REL     CHAR;                    /* current release             */
+ DCL  SEC     CHAR;                    /* security classification     */
+
+ DCL  LENGTH  BUILTIN;
+ DCL  INDEX   BUILTIN;
+ DCL  SUBSTR  BUILTIN;
+ DCL  PARMSET BUILTIN;
+
+ SEC = '''IBM INTERNAL USE ONLY''';
+ REL = 'R01';
+ FILL = '
+         ';
+ ASSM = '';
+ CODE = '';
+
+ CODE = $DAIMOD(PGMNAME);
+ ASSM = '/* BDMX01T */';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = ' DCL 1 $ID STATIC,';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = '       2  $NAME      CHAR(20) INIT(''' || NAME || '''),';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = '       2  $PGM_NAME  CHAR(9) INIT(''' || PGMNAME || '''),';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = '       2  $SEC       CHAR(22) INIT(' || SEC || '),';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = '       2  $DATE_TIME CHAR(19) INIT(''' ||COMPILETIME|| '''),';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ ASSM = '       2  $RELEASE CHAR(10) INIT(''OBJLVL ' || REL || ''');';
+ CCTR = LENGTH(ASSM);
+ CODE = CODE || ASSM || SUBSTR(FILL,1,(71-CCTR));
+
+ RETURN(CODE);
+
+ %END BDMX01T;
+

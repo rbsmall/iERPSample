@@ -1,0 +1,141 @@
+ %NOPRINT;
+ /*------------------------------------------------------------------*/
+ /* THIS MACRO CREATES THE STATEMENT TO CALL PLI-MODULE BDM599C.     */
+ /*                                                                  */
+ /* IN THE PROGRAM YOU CODE:         MSGHNDLR(5,REC_COUNT,FILENAME); */
+ /*                                                                  */
+ /*                                                                  */
+ /* THIS MACRO REPLACES THAT WITH:   CALL BDM599C('5','2'            */
+ /*                                              ,CHAR(REC_COUNT)    */
+ /*                                              ,CHAR(FILENAME));   */
+ /*------------------------------------------------------------------*/
+ %DCL MSGHNDLR ENTRY;
+
+ %MSGHNDLR:
+ PROC(MSGNUM,A1,A2,A3,A4,A5,A6,A7,A8,A9) STATEMENT RETURNS(CHARACTER);
+  DECLARE (MSGNUM,A1,A2,A3,A4,A5,A6,A7,A8,A9,NP,STMT,M)    CHARACTER,
+          (PARMSET)                                        BUILTIN;
+  IF ^PARMSET(MSGNUM)
+  THEN DO;
+       NOTE ('MISSING ARGUMENT FOR MSGHNDLR: MSGNUM',8);
+       RETURN('/* INVALID MSGHNDLR CALL */');
+  END;
+  NP = '0';
+  IF PARMSET(A1) THEN NP = '1';
+  IF PARMSET(A2) THEN NP = '2';
+  IF PARMSET(A3) THEN NP = '3';
+  IF PARMSET(A4) THEN NP = '4';
+  IF PARMSET(A5) THEN NP = '5';
+  IF PARMSET(A6) THEN NP = '6';
+  IF PARMSET(A7) THEN NP = '7';
+  IF PARMSET(A8) THEN NP = '8';
+  IF PARMSET(A9) THEN NP = '9';
+
+  M = ''''||UNCOM(MSGNUM)||''','''||NP||'''';
+
+  STMT = 'CALL BDM599C('||PARMPREP(M,'N','0',NP);
+  IF NP > '0' THEN STMT = STMT||','||PARMPREP(A1,'Y','1',NP);
+  IF NP > '1' THEN STMT = STMT||','||PARMPREP(A2,'Y','2',NP);
+  IF NP > '2' THEN STMT = STMT||','||PARMPREP(A3,'Y','3',NP);
+  IF NP > '3' THEN STMT = STMT||','||PARMPREP(A4,'Y','4',NP);
+  IF NP > '4' THEN STMT = STMT||','||PARMPREP(A5,'Y','5',NP);
+  IF NP > '5' THEN STMT = STMT||','||PARMPREP(A6,'Y','6',NP);
+  IF NP > '6' THEN STMT = STMT||','||PARMPREP(A7,'Y','7',NP);
+  IF NP > '7' THEN STMT = STMT||','||PARMPREP(A8,'Y','8',NP);
+  IF NP > '8' THEN STMT = STMT||','||PARMPREP(A9,'Y','9',NP);
+
+  RETURN(STMT);
+ %END MSGHNDLR;
+
+ /*------------------------------------------------------------------*/
+ /* THE ARGUMENT MIGHT CONTAIN COMMENTS. THEY MUST BE REMOVED.       */
+ /* ALSO LEADING AND TRAILING BLANKS ARE REMOVED.                    */
+ /* THEN THE ARGUMENT IS SURROUNDED BY THE CHAR() FUNCTION. AND      */
+ /* FINALLY THE CHAR(ARG) IS PADDED WITH BLANKS TO CREATE A LINE OF  */
+ /* 71 BYTES. THAT WAY, ALL ARGUMENTS WILL BE ALIGNED. SEE TOP.      */
+ /*------------------------------------------------------------------*/
+ %DCL PARMPREP ENTRY;
+
+ %PARMPREP:
+ PROC(A,MAKECHAR,PN,NP) RETURNS(CHARACTER);
+  DECLARE (A,MAKECHAR,PN,NP,B,BLNKS)      CHARACTER,
+          (X,L)                           FIXED,
+          (SUBSTR,LENGTH)                 BUILTIN;
+  BLNKS = '                                    ';
+
+  B = UNCOM(A);
+
+  IF MAKECHAR = 'Y'
+  THEN B = 'CHAR('||B||')';
+
+  IF PN = NP
+  THEN B = B||');';
+
+  L = LENGTH(B);
+  X = -1;
+  L0: X = X + 71;
+  IF L > X
+  THEN GOTO L0;
+
+  RETURN(SUBSTR(B||BLNKS||BLNKS,1,X));
+ %END PARMPREP;
+
+ /*------------------------------------------------------------------*/
+ /* REMOVE POSSIBLE COMMENTS FROM ARGUMENT.                          */
+ /* IF S = 0 THEN THE ARGUMENT CONTAINS NO COMMENTS.                 */
+ /*------------------------------------------------------------------*/
+ %DCL UNCOM ENTRY;
+
+ %UNCOM:
+ PROC(A) RETURNS(CHARACTER);
+  DECLARE (A,B)                             CHARACTER,
+          (E,S,L)                           FIXED,
+          (LENGTH,SUBSTR,INDEX)             BUILTIN;
+
+  B = ' '||A||' ';
+  L1: L = LENGTH(B);
+
+  S = INDEX(B,'/*');
+  E = INDEX(B,'*/');
+  IF S = 0
+  THEN GOTO L2;
+
+  B = SUBSTR(B,1,S-1)||SUBSTR(B,E+2);
+
+  GOTO L1;
+
+  L2: RETURN(STRIP(B));
+ %END UNCOM;
+
+ /*------------------------------------------------------------------*/
+ /* REMOVE LEADING AND TRAILING BLANKS FROM ARGUMENT.                */
+ /*------------------------------------------------------------------*/
+ %DCL STRIP ENTRY;
+
+ %STRIP:
+ PROC(A) RETURNS(CHARACTER);
+  DECLARE (A,B)                             CHARACTER,
+          (E,S,L)                           FIXED,
+          (LENGTH,SUBSTR)                   BUILTIN;
+
+  L = LENGTH(A);
+
+  DO S = 1 TO L;
+    IF SUBSTR(A,S,1) ^= ' '
+    THEN GOTO L3;
+  END;
+  L3:;
+  DO E = L TO 1 BY -1;
+    IF SUBSTR(A,E,1) ^= ' '
+    THEN GOTO L4;
+  END;
+  L4:;
+
+  IF S > L
+  THEN B = '** INVALID ARGUMENT **';
+  ELSE B = SUBSTR(A,S,E-S+1);
+
+  RETURN(B);
+ %END STRIP;
+
+ %PRINT;

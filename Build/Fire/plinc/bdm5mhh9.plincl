@@ -1,0 +1,8 @@
+  IF PLIRET <= 4
+  THEN MSGHNDLR (3);               /* PROGRAM ENDED MESSAGE          */
+  ELSE MSGHNDLR (4);               /* PROGRAM ENDED W.ERRORS MESSAGE */
+ /*------------------------------------------------------------------*/
+ /* THIS CALL FINISHES THE MESSAGEHANDLER. CODE THIS INCLUDE IN THE  */
+ /* END-OF-PROGRAM SECTION OF THE CALLING PROGRAM.                   */
+ /*------------------------------------------------------------------*/
+  MSGHNDLR (FIN);

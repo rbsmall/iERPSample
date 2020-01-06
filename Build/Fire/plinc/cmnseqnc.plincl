@@ -1,0 +1,22 @@
+   /*******************************************************************/00010000
+   /*                                                                 */00020000
+   /*    -----------  IBM INTERNAL USE ONLY  ----------------         */00030000
+   /*                                                                 */00040000
+   /*           FILE  TRANSMISSION  HEADER  RECORD                    */00050000
+   /*                                                                 */00060000
+   /*   NOTE - CYCLE NUMBER ROLLS OVER FROM 999 TO 1.                 */00070000
+   /*                                                                 */00080000
+   /*   04-01-2012    SRIRAM                                          */00090000
+   /*******************************************************************/00100000
+     5 CYCLE_NUMBER  PIC'999',        /* TRANSMIS. SEQUENCE #   1-3  */ 00110000
+     5 FILL1         CHAR(1),         /* FILLER                 4-4  */ 00120000
+     5 XMIT_DATE     CHAR(6),         /* TRANSMISSION YYMMDD    5-10 */ 00130000
+     5 XMIT_TIME     CHAR(6),         /* TRANSMISSION HHMMSS   11-16 */ 00140000
+     5 DATE_ADDED    CHAR(6),         /* TO SEQ FILE           17-22 */ 00150000
+     5 TIME_ADDED    CHAR(6),         /* TRANSMISSION HHMMSS   23-28 */ 00160000
+     5 FILE_ID       CHAR(6),         /* UNIQUE IDENTIFIER     29-34 */ 00170000
+     5 TOTAL_RECS    PIC'(9)9',       /* NUMBER OF RECORDS     35-43 */ 00180000
+     5 COMPONENT_1   PIC'(10)9V99-',  /* FINANCIAL BUCKET #1   44-56 */ 00190000
+     5 COMPONENT_2   PIC'(10)9V99-',  /* FINANCIAL BUCKET #2   57-69 */ 00200000
+     5 COMPONENT_3   PIC'(7)9V99-',   /* FINANCIAL BUCKET #3   70-79 */ 00210000
+     5 FILL2         CHAR(1);         /* FILLER                80-80 */ 00220000

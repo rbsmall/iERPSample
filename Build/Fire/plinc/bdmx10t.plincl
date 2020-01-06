@@ -1,0 +1,28 @@
+
+ /********************************************************************/
+ /*                                                                  */
+ /*  BDMX10T - CTRL RECORD STRUCTURE                                 */
+ /*             THIS IS THE RECORD STRUCTURE OF THE CTRL RECORDS.    */
+ /*                                                                  */
+ /*  HISTORY:                                                        */
+ /*  DATE       BY   REL  REASON     ITER  DESCRIPTION               */
+ /*  10/14/15  JOHN  1.0  TASKxxxx   1.0   NEWLY CREATED             */
+ /********************************************************************/
+       2 STREAM_ID       CHAR(2),                             /* 001 */
+       2 SOURCE_TYPE     CHAR(2),                             /* 003 */
+       2 ACCTYR          CHAR(4),                             /* 005 */
+       2 POSTING_PERIOD  CHAR(2),                             /* 009 */
+       2 CLIENT          CHAR(3),                             /* 011 */
+       2 COMPANY_CD      CHAR(4),                             /* 014 */
+       2 LOGICAL_SYSTEM  CHAR(10),                            /* 018 */
+       2 PROFIT_CTR      CHAR(10),                            /* 028 */
+       2 PROFIT_CTR_TP   CHAR(10),                            /* 038 */
+       2 GL_ACCOUNT      CHAR(10),                            /* 048 */
+       2 COST_ELEMENT    CHAR(10),                            /* 058 */
+       2 FUNCTIONAL_AREA CHAR(16),                            /* 068 */
+       2 TX_TYPE         CHAR(3) ,                            /* 084 */
+       2 COMPANY_ID_TP   CHAR(6) ,                            /* 087 */
+       2 DR_CR           CHAR(1) ,                            /* 093 */
+       2 AMTLOC          FIXED DEC(15,2),                     /* 094 */
+       2 AMTDLR          FIXED DEC(15,2),                     /* 102 */
+       2 LAST_UPT_ID     CHAR(8);                             /* 110 */

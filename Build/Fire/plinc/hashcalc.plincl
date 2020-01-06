@@ -1,0 +1,54 @@
+1/********************************************************************/ 00010000
+ /********************************************************************/ 00020000
+ /*   HASH_AMOUNT FUNCTION                                              00030000
+ /********************************************************************/ 00040000
+ /*                                                                     00050000
+ /*  NAME FUNCTION:                                                     00060000
+ /*    HASH_AMOUNT                                                      00070000
+ /*                                                                     00080000
+ /*  CLASSIFICATION:                                                    00090000
+ /*    IBM INTERNAL USE ONLY                                            00100000
+ /*                                                                     00110000
+ /*  FUNCTION:                                                          00120000
+ /*    Calculate the hash total of a FIXED DEC (23,2) field.            00130001
+ /*                                                                     00140000
+ /*  DESCRIPTION:                                                       00150000
+ /*    The amount is made positive in all cases so that the hash        00160000
+ /*    total is always increasing and does not net out.  The MOD        00170000
+ /*    function is then used to calculate a remainder based on the      00180000
+ /*    hash_key.  The remainder will always be 0 upto hash_key in       00190000
+ /*    value.                                                           00200000
+ /*                                                                     00210000
+ /*  PARAMETERS:                                                        00220000
+ /*    hash_key: The value to use in the MOD function.  This is         00230000
+ /*              set as a constant in the calling program.  It cannot   00240000
+ /*              be set to zero.                                        00250000
+ /*    amount  : The amount to generate the HASH_AMOUNT off of.         00260000
+ /*                                                                     00270000
+ /*  DB2 TABLES IN/OUT: None                                            00280000
+ /*                                                                     00290000
+ /*  MESSAGES:                                                          00300000
+ /*    None                                                             00310000
+ /*                                                                     00320000
+ /*  PROGRAMMED ABENDS:                                                 00330000
+ /*    NONE                                                             00340000
+ /*                                                                     00350000
+ /*  HISTORY:                                                           00360000
+ /*  DATE      PROGRAMMER    REASON    REL.NR   DESCRIPTION             00370000
+ /*  04/01/12  SRIRAM        ITER01    1.0      ORIGINAL CODING      */ 00380000
+ /*                                                                     00390000
+ /********************************************************************/ 00400000
+ HASHAMT: PROC (HASH_KEY, AMOUNT)                                       00410000
+    RETURNS (FIXED DEC(23,2));                                          00420001
+                                                                        00430000
+  DCL hash_key PIC '999999999V99';                                      00440000
+  DCL amount   fixed dec(23,2);                                         00450001
+                                                                        00460000
+  if amount < 0 then do;                                                00470000
+     amount  = amount * -1;   /* convert all values to positive*/       00480000
+  end;                                                                  00490000
+  RETURN(MOD(amount,hash_key));                                         00500000
+                                                                        00510000
+                                                                        00520000
+ END HASHAMT ;                                                          00530000
+                                                                        00540000

@@ -1,0 +1,19 @@
+ /*------------------------------------------------------------------*/
+ /* X99C_STORAGE IS USED TO ALLOCATE THE MESSAGE_ARRAY IN THE        */
+ /* MESSAGE_HANDLER. A VALUE OF 15 SHOULD BE SUFFICIENT FOR MOST     */
+ /* PROGRAMS. IT INDICATES THE NUMBER OF DIFFERENT MESSAGES THAT THE */
+ /* MODULE NEEDS TO STORE INTERNALLY.                                */
+ /* IF THIS NUMBER IS TOO SMALL, THE CALLING PROGRAM MUST SET IT     */
+ /* BEFORE THIS INCLUDE IN THE PROGRAM SOURCE.                       */
+ /*------------------------------------------------------------------*/
+  DCL BDM599C                      ENTRY EXT;
+
+  DCL X99C_STORAGE                 PIC'999' INIT(15);
+  DCL X99C_PTR                     PTR;
+  DCL X99C_PTRC                    CHAR(4) BASED(ADDR(X99C_PTR));
+
+  X99C_PTR = ADDR(SQLCA);
+
+  MSGHNDLR (INI,$PGM_NAME,X99C_STORAGE,X99C_PTRC);
+ /*------------------------------------------------------------------*/
+  MSGHNDLR (2,COMP_TIME);          /* PROGRAM STARTED MESSAGE        */

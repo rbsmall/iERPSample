@@ -1,0 +1,15 @@
+ /********************************************************************/ 00010000
+ /*                                                                     00020000
+ /*  CFLBDMT - RECORD STRUCTURE FOR THE BH FINANCIAL TRAILER RECORD     00030001
+ /*                                                                     00040000
+ /*  HISTORY:                                                           00050000
+ /*  DATE      PROGRAMMER    REASON    REL.NR   DESCRIPTION             00060000
+ /*  04/01/12  SB            ITER01    1.0      BH FINANCIAL TRAILER    00070000
+ /*                                             STRUCTURE               00080000
+ /*                                                                     00090000
+ /********************************************************************/ 00100000
+   5 TRL_INDICATOR CHAR(3)          INIT('TMC'),/* CONTANT TRL TMC   */ 00110000
+   5 RECORD_COUNT  PIC '(9)9'       INIT(0),    /* RECORD COUNT      */ 00120000
+   5 AMT_USD_TOT   FIXED DEC (17,2) INIT(0),    /* TOTAL AMT USD     */ 00130000
+   5 HASH_TOTAL    FIXED DEC (17,2) INIT(0),    /* HASH TOTAL        */ 00140000
+   5 FILLER        CHAR(213)        INIT(' ');  /* FILLER            */ 00150000

@@ -1,0 +1,14 @@
+   /*******************************************************************/00010000
+   /*                                                                 */00020000
+   /*    -----------  IBM INTERNAL USE ONLY  ----------------         */00030000
+   /*                                                                 */00040000
+   /*           FILE  TRANSMISSION TRAILER  RECORD                    */00050000
+   /*                                                                 */00060000
+   /*   04-01-2012 SRIRAM                                             */00070000
+   /*******************************************************************/00080000
+   3 XMIT_TRAILER,                                                      00090000
+     5 TRAILER_MARK  CHAR(3),         /* CONSTANT 'TRL'        1-3   */ 00100000
+     5 TOTAL_RECS    PIC'(7)9',       /* NUMBER OF RECORDS     4-10  */ 00110000
+     5 COMPONENT_1   PIC'(10)9V99-',  /* FINANCIAL BUCKET #1  11-23  */ 00120000
+     5 COMPONENT_2   PIC'(10)9V99-',  /* FINANCIAL BUCKET #2  24-36  */ 00130000
+     5 COMPONENT_3   PIC'(7)9V99-',   /* FINANCIAL BUCKET #3  37-46  */ 00140000

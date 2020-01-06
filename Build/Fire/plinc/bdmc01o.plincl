@@ -1,0 +1,134 @@
+
+ /********************************************************************/
+ /*                                                                  */
+ /*  BDMC01O - OUTPUT STRUCTURE                                      */
+ /*             THIS IS THE RECORD STRUCTURE OF THE BDMC01M OUTPUT   */
+ /*                                                                  */
+ /*  HISTORY:                                                        */
+ /*  DATE       BY   REL  REASON     ITER  DESCRIPTION               */
+ /*  10/28/16  JOHN  1.0  TASKxxxx   1.0   NEWLY CREATED             */
+ /********************************************************************/
+      10 COMPANY_CD      CHAR(4),                             /* 001 */
+      10 AMOUNT(60)      DECIMAL(15,2),                       /* 005 */
+      10 AMOUNT_CALC(60) DECIMAL(15,2),                       /* 477 */
+      10 DATA_RECORD     CHAR(2000);                          /* 485 */
+  /*  10 AMOUNT#2        DECIMAL(15,2),                       /* 013 */
+  /*  10 AMOUNT#3        DECIMAL(15,2),                       /* 021 */
+  /*  10 AMOUNT#4        DECIMAL(15,2),                       /* 029 */
+  /*  10 AMOUNT#5        DECIMAL(15,2),                       /* 037 */
+  /*  10 AMOUNT#6        DECIMAL(15,2),                       /* 045 */
+  /*  10 AMOUNT#7        DECIMAL(15,2),                       /* 053 */
+  /*  10 AMOUNT#8        DECIMAL(15,2),                       /* 061 */
+  /*  10 AMOUNT#9        DECIMAL(15,2),                       /* 069 */
+  /*  10 AMOUNT#10       DECIMAL(15,2),                       /* 077 */
+  /*  10 AMOUNT#11       DECIMAL(15,2),                       /* 085 */
+  /*  10 AMOUNT#12       DECIMAL(15,2),                       /* 093 */
+  /*  10 AMOUNT#13       DECIMAL(15,2),                       /* 101 */
+  /*  10 AMOUNT#14       DECIMAL(15,2),                       /* 109 */
+  /*  10 AMOUNT#15       DECIMAL(15,2),                       /* 117 */
+  /*  10 AMOUNT#16       DECIMAL(15,2),                       /* 125 */
+  /*  10 AMOUNT#17       DECIMAL(15,2),                       /* 133 */
+  /*  10 AMOUNT#18       DECIMAL(15,2),                       /* 141 */
+  /*  10 AMOUNT#19       DECIMAL(15,2),                       /* 149 */
+  /*  10 AMOUNT#20       DECIMAL(15,2),                       /* 157 */
+  /*  10 AMOUNT#21       DECIMAL(15,2),                       /* 165 */
+  /*  10 AMOUNT#22       DECIMAL(15,2),                       /* 173 */
+  /*  10 AMOUNT#23       DECIMAL(15,2),                       /* 181 */
+  /*  10 AMOUNT#24       DECIMAL(15,2),                       /* 189 */
+  /*  10 AMOUNT#25       DECIMAL(15,2),                       /* 197 */
+  /*  10 AMOUNT#26       DECIMAL(15,2),                       /* 205 */
+  /*  10 AMOUNT#27       DECIMAL(15,2),                       /* 213 */
+  /*  10 AMOUNT#28       DECIMAL(15,2),                       /* 221 */
+  /*  10 AMOUNT#29       DECIMAL(15,2),                       /* 229 */
+  /*  10 AMOUNT#30       DECIMAL(15,2),                       /* 237 */
+  /*  10 AMOUNT#31       DECIMAL(15,2),                       /* 245 */
+  /*  10 AMOUNT#32       DECIMAL(15,2),                       /* 253 */
+  /*  10 AMOUNT#33       DECIMAL(15,2),                       /* 261 */
+  /*  10 AMOUNT#34       DECIMAL(15,2),                       /* 269 */
+  /*  10 AMOUNT#35       DECIMAL(15,2),                       /* 277 */
+  /*  10 AMOUNT#36       DECIMAL(15,2),                       /* 285 */
+  /*  10 AMOUNT#37       DECIMAL(15,2),                       /* 293 */
+  /*  10 AMOUNT#38       DECIMAL(15,2),                       /* 301 */
+  /*  10 AMOUNT#39       DECIMAL(15,2),                       /* 309 */
+  /*  10 AMOUNT#40       DECIMAL(15,2),                       /* 317 */
+  /*  10 AMOUNT#41       DECIMAL(15,2),                       /* 325 */
+  /*  10 AMOUNT#42       DECIMAL(15,2),                       /* 333 */
+  /*  10 AMOUNT#43       DECIMAL(15,2),                       /* 341 */
+  /*  10 AMOUNT#44       DECIMAL(15,2),                       /* 349 */
+  /*  10 AMOUNT#45       DECIMAL(15,2),                       /* 357 */
+  /*  10 AMOUNT#46       DECIMAL(15,2),                       /* 365 */
+  /*  10 AMOUNT#47       DECIMAL(15,2),                       /* 373 */
+  /*  10 AMOUNT#48       DECIMAL(15,2),                       /* 381 */
+  /*  10 AMOUNT#49       DECIMAL(15,2),                       /* 389 */
+  /*  10 AMOUNT#50       DECIMAL(15,2),                       /* 397 */
+  /*  10 AMOUNT#51       DECIMAL(15,2),                       /* 405 */
+  /*  10 AMOUNT#52       DECIMAL(15,2),                       /* 413 */
+  /*  10 AMOUNT#53       DECIMAL(15,2),                       /* 421 */
+  /*  10 AMOUNT#54       DECIMAL(15,2),                       /* 429 */
+  /*  10 AMOUNT#55       DECIMAL(15,2),                       /* 437 */
+  /*  10 AMOUNT#56       DECIMAL(15,2),                       /* 445 */
+  /*  10 AMOUNT#57       DECIMAL(15,2),                       /* 453 */
+  /*  10 AMOUNT#58       DECIMAL(15,2),                       /* 461 */
+  /*  10 AMOUNT#59       DECIMAL(15,2),                       /* 469 */
+  /*  10 AMOUNT#60       DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#1   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#2   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#3   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#4   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#5   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#6   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#7   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#8   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#9   DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#10  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#11  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#12  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#13  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#14  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#15  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#16  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#17  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#18  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#19  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#20  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#21  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#22  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#23  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#24  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#25  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#26  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#27  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#28  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#29  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#30  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#31  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#32  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#33  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#34  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#35  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#36  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#37  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#38  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#39  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#40  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#41  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#42  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#43  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#44  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#45  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#46  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#47  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#48  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#49  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#50  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#51  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#52  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#53  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#54  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#55  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#56  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#57  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#58  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#59  DECIMAL(15,2),                       /* 477 */
+  /*  10 AMOUNT_CALC#60  DECIMAL(15,2),                       /* 477 */
+  /*  10 DATA RECORD     CHAR(2000);                          /* 485 */

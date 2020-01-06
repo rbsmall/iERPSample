@@ -1,0 +1,38 @@
+ %DCL $DAIMOD ENTRY;                                                    00010000
+ %$DAIMOD : PROCEDURE(SDAIMODULE) RETURNS(CHAR);                        00020000
+ DCL  SDAIMODULE      CHAR;                                             00030000
+ DCL  SDAICODE        CHAR;                                             00040000
+ DCL  SDAIFILL        CHAR;                                             00050000
+ DCL  SDAIASSM       CHAR;                                              00060000
+ DCL  SDAICCTR      FIXED;                                              00070000
+ DCL  LENGTH      BUILTIN;                                              00080000
+ DCL  SUBSTR      BUILTIN;                                              00090000
+ DCL  PARMSET     BUILTIN;                                              00100000
+ DCL  COMPILETIME BUILTIN;                                              00110000
+ DCL  SDAICOMPUTIME   CHAR;                                             00120000
+ SDAICOMPUTIME = COMPILETIME;                                           00130000
+ SDAIFILL = '                                                           00140000
+         ';                                                             00150000
+ SDAIASSM = '';                                                         00160000
+ SDAICODE = '';                                                         00170000
+ SDAIASSM = 'DCL 1 SDAISTP STATIC,';                                    00180000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00190000
+ SDAICODE = SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));               00200000
+ SDAIASSM = '  3 SDAISTS  CHAR(10) INIT(''#DAI@#DAI@''),';              00210000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00220000
+ SDAICODE = SDAICODE || SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));   00230000
+ SDAIASSM = '  3 SDAITXR  CHAR(16) INIT(''ABR CONTROL MOD=''),';        00240000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00250000
+ SDAICODE = SDAICODE || SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));   00260000
+ SDAIASSM = '  3 SDAINAM  CHAR(8)  INIT(''' || SDAIMODULE || '''),';    00270000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00280000
+ SDAICODE = SDAICODE || SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));   00290000
+ SDAIASSM = '  3 SDAICOT  CHAR(18) INIT(''' || SDAICOMPUTIME || '''),'; 00300000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00310000
+ SDAICODE = SDAICODE || SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));   00320000
+ SDAIASSM = '  3 SDAISTE  CHAR(05) INIT(''#DAI@'');';                   00330000
+ SDAICCTR = LENGTH(SDAIASSM);                                           00340000
+ SDAICODE = SDAICODE || SDAIASSM || SUBSTR(SDAIFILL,1,(71-SDAICCTR));   00350000
+  RETURN(SDAICODE);                                                     00360000
+ %END $DAIMOD;                                                          00370000
+ %ACTIVATE $DAIMOD;                                                     00380000

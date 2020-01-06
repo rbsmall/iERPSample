@@ -1,0 +1,94 @@
+ DCL 1 HEADER1,
+       3 FILL01               CHAR(09)   INIT
+       ('RECONID:'),
+       3 RECON_ID             CHAR(10),
+       3 FILL02               CHAR(11)   INIT(''),
+       3 FILL03               CHAR(40)   INIT
+       ('IERP-FIRE AUTO-RECONCILIATION REPORT'),
+       3 FILL04               CHAR(10)   INIT('');
+
+ DCL 1 HEADER2,
+       3 FILL01               CHAR(12)   INIT
+       ('RECON SCOPE:'),
+       3 SCOPE                CHAR(10),
+       3 FILL02               CHAR(08)   INIT(''),
+       3 FILL03               CHAR(07)   INIT
+       ('TITLE: '),
+       3 TITLE                CHAR(40),
+       3 FILL04               CHAR(03)   INIT('');
+
+ DCL 1 HEADER3,
+       3 FILL01               CHAR(30)   INIT(''),
+       3 FILL02               CHAR(50)   INIT
+       ('*****  IBM CONFIDENTIAL  *****');
+
+ DCL 1 HEADER4,
+       3 FILL01               CHAR(12)   INIT
+       ('FIRE TABLE: '),
+       3 TABLE_NAME           CHAR(29),
+       3 FILL02               CHAR(39)   INIT('');
+
+ DCL 1 HEADER5,
+       3 FILL01               CHAR(11)   INIT
+       ('IERP FILE: '),
+       3 TABLE_NAME           CHAR(29),
+       3 FILL02               CHAR(40)   INIT('');
+
+ DCL 1 HEADER6,
+       3 FILL01               CHAR(06)   INIT
+       ('DATE: '),
+       3 DATE                 CHAR(10),
+       3 FILL02               CHAR(64)   INIT('');
+
+ DCL 1 HEADER7,
+       3 FILL01               CHAR(06)   INIT
+       ('TIME: '),
+       3 TIME                 CHAR(10),
+       3 FILL02               CHAR(64)   INIT('');
+
+ DCL 1 HEADER8,
+       3 TABLE_NAME           CHAR(22),
+       3 FILE1                CHAR(03) INIT(' '),
+       3 TABLE_NAME2          CHAR(22),
+       3 FILE2                CHAR(03) INIT(' '),
+       3 RECON_RESULT         CHAR(20)   INIT
+       ('RECON RESULT        '),
+       3 FILE3                CHAR(10) INIT(' ');
+
+ DCL 1 HEADER9,
+       3 FILL01               CHAR(22)   INIT
+       ('----------------------'),
+       3 FILE1                CHAR(03) INIT(' '),
+       3 FILL02               CHAR(22)   INIT
+       ('----------------------'),
+       3 FILE2                CHAR(03) INIT(' '),
+       3 FILL03               CHAR(20)   INIT
+       ('------------------- '),
+       3 FILL04               CHAR(10) INIT(' ');
+
+ DCL 1 DATA1,
+       3 RECON_COUNT1         PIC'ZZZ,ZZZ,ZZ9',
+       3 FILL01               CHAR(14) INIT(' '),
+       3 RECON_COUNT2         PIC'ZZZ,ZZZ,ZZ9',
+       3 FILL02               CHAR(14) INIT(' '),
+       3 RECON_RESULT         CHAR(20)   INIT(' '),
+       3 FILL03               CHAR(10) INIT(' ');
+
+ DCL 1 FOOTER1,
+       3 FILL01               CHAR(22)   INIT
+       ('----------------------'),
+       3 FILE1                CHAR(03) INIT(' '),
+       3 FILL02               CHAR(22)   INIT
+       ('----------------------'),
+       3 FILE2                CHAR(03) INIT(' '),
+       3 FILL03               CHAR(20)   INIT
+       ('------------------- '),
+       3 FILL04               CHAR(10) INIT(' ');
+
+ DCL 1 FOOTER2,
+       3 FILL01               CHAR(30)   INIT(''),
+       3 FILL02               CHAR(50)   INIT
+       ('END OF REPORT');
+
+ DCL 1 BLANK_LINE,
+       3 FILL01               CHAR(80)   INIT('');

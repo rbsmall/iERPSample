@@ -1,0 +1,270 @@
+1BDM010M: PROCEDURE(PARM) OPTIONS(MAIN NOEXECOPS) REORDER;
+ DCL PARM  CHAR(80) VAR;              /* PARAMETERS                  */
+ /* BDM010M  SETVARS SUBSTITUTION PROGRAM  Test Buid               */
+ /********************************************************************
+ /*
+ /*  NAME PROCEDURE:
+ /*    BDM010M
+ /*
+ /*  FUNCTION:
+ /*    SETVARS SUBSTITUTION PROGRAM
+ /*
+ /*  FILES IN:
+ /*    CNTLIN           BDM@VAR PROCLIB MEMBER (LRECL 80)
+ /*    FILEIN           SKELETON FILE  (LRECL 80)
+ /*
+ /*
+ /*  FILES OUT:
+ /*    FILEOUT          FILE WITH SUBSTITUTED SETVARS
+ /*
+ /*
+ /*
+ /*  DESCRIPTION:
+ /*    THIS PROGRAM WILL SUBSTITUTE SETVARS WITHIN A SKELETON FILE.
+ /*    THESE SETVARS VARIABLES ARE READ FROM THE CNTLIN FILE
+ /*    (WHICH SHOULD BE THE BDM@VAR PROCEDURE).
+ /*
+ /*    THE CURRENT SUPPORTED SET OF VARIABLES IS:
+ /*
+ /*    DATAQ
+ /*    SYS
+ /*    FTPQ
+ /*    UNLQ
+ /*    STRM
+ /*    BDMQ
+ /*    DRPFX
+ /*
+ /*    EXAMPLE RECORD:
+ /*
+ /*    INPUT:   &DATAQ..&SYS..&STRM..BDMRBKJ0.LBDMCMBL.SEQ
+ /*
+ /*    OUTPUT:  BDMD.UT.AB.BDMRBKJ0.LBDMCMBL.SEQ
+ /*
+ /*  MESSAGES:
+ /*    NONE
+ /*
+ /*  PROGRAMMED ABENDS:
+ /*    NONE
+ /*
+ /*  HISTORY:
+ /*  DATE      PROGRAMMER    REASON     REL ITER     DESCRIPTION
+ /*  17/01/12  SRIRAM R.B    BHFDM R1.0 1.0  8       CREATED NEW
+ /*                                                  ADDED
+ /* COPYRIGHT:
+ /*    THIS PROGRAM WAS DESIGNED AND WRITTEN FOR IBM INTERNAL USE
+ /*    ONLY.  REFER TO IBM COPYRIGHT BOOKLET FOR ADDITIONAL
+ /*    INFORMATION.
+ /*
+ /********************************************************************/
+
+ /********************************************************************/
+ /*   -- PRE-PROCESSOR DECLARES                                      */
+ /********************************************************************/
+ %DCL COMP_TIME CHAR;                       /* PRE-PROC VAR. WITH    */
+                                            /* COMPILE TIME          */
+ %DCL COMPILETIME BUILTIN;                  /*                       */
+ %COMP_TIME=''''||COMPILETIME||'''';       /* FILL VAR WITH CMP.TIME */
+                                            /* COMPILE TIME          */
+ /********************************************************************/
+ /*   LOCAL DECLARATIONS                                             */
+ /********************************************************************/
+ /********************************************************************/
+ /*   -- BUILTIN FUNCTIONS                                           */
+ /********************************************************************/
+ DCL ADDR         BUILTIN;
+ DCL CHAR         BUILTIN;
+ DCL PLIRETC      BUILTIN;
+ DCL PLIRETV      BUILTIN;
+ DCL PLIDUMP      BUILTIN;
+ DCL TIME         BUILTIN;
+ DCL LOW          BUILTIN;
+ DCL STG          BUILTIN;
+ DCL NULL         BUILTIN;
+ DCL ONCODE       BUILTIN;
+ DCL ONLOC        BUILTIN;
+ DCL INDEX        BUILTIN;
+ DCL SUBSTR       BUILTIN;
+ DCL LENGTH       BUILTIN;
+ /********************************************************************/
+ /*   -- LOCAL RETURNCODES AND COUNTERS                              */
+ /********************************************************************/
+ DCL PLIRET       FIXED BIN(31)  INIT(0);
+
+ /********************************************************************/
+ /*   -- LOCAL SWITCHES                                              */
+ /********************************************************************/
+ DCL I,J            FIXED BIN(15);
+ DCL START_POS      FIXED BIN(15);
+ DCL QUOTE_POS      FIXED BIN(15);
+ DCL VARCNT         FIXED BIN(15);
+ DCL DUMMY_VAL      CHAR (20) INIT ('@!@!@');
+ DCL PARMVAR(7)     CHAR (8) VAR;
+ DCL PARMVAL(7)     CHAR (20) VAR;
+ DCL VARLEN(7)      FIXED BIN(15) INIT(0);
+
+ /********************************************************************/
+ /*   FILE RECORD LAYOUTS                                            */
+ /********************************************************************/
+ DCL INREC          CHAR (80);
+ DCL CNTLREC        CHAR (80);
+ DCL OUTREC         CHAR (80);
+
+ /********************************************************************/
+ /*   FILE DECLARATIONS                                              */
+ /********************************************************************/
+ DCL SYSPRINT       FILE STREAM OUTPUT;
+ DCL FILEIN         FILE RECORD INPUT;
+ DCL CNTLIN         FILE RECORD INPUT;
+ DCL FILEOUT        FILE RECORD OUTPUT;
+ DCL EOF_FILEIN     BIT (1);
+ DCL EOF_CNTLIN     BIT (1);
+ /********************************************************************/
+ /*   PRE-PROCESSOR MACRO FOR X99 MESSAGE-HANDLER                    */
+ /********************************************************************/
+ %INCLUDE BDM5MHH0;
+
+ /********************************************************************/
+ /*   ABR REQUIRED INCLUDES FOR EYECATCHER                           */
+ /********************************************************************/
+ %NOPRINT;
+ %INCLUDE BDMX01T;
+ %PRINT;
+ /********************************************************************/
+ /*   GENERATE EYECATCHER                                            */
+ /********************************************************************/
+ BDMX01T(BDM,BDM010M);
+
+ /********************************************************************/
+ /*   ON ERROR HANDLING                                              */
+ /********************************************************************/
+ ON ENDFILE( FILEIN )
+   EOF_FILEIN    = '1'B;
+
+ ON ENDFILE( CNTLIN )
+   EOF_CNTLIN    = '1'B;
+
+ ON ERROR SNAP
+   BEGIN ORDER;
+     CALL PLIDUMP('TNFCNHNB');
+     MSGHNDLR         (100,
+                       ONCODE(),
+                       ONLOC());
+     PLIRET = 12;                 /* SET PLI RETURN CODE FIELD       */
+     GOTO END_OF_PROG;
+   END;
+ /********************************************************************/
+ /*   OPEN FILES                                                     */
+ /********************************************************************/
+ OPEN FILE(FILEIN);
+ OPEN FILE(CNTLIN);
+ OPEN FILE(FILEOUT);
+
+ /********************************************************************/
+ /*   INITIALIZATIONS FOR X99 MESSAGE-HANDLER                        */
+ /********************************************************************/
+ %INCLUDE BDM5MHH1;
+
+0/********************************************************************/
+ /*   START OF PROCESSING                                            */
+ /********************************************************************/
+ /********************************************************************/
+ /*   INITIALIZATIONS                                                */
+ /********************************************************************/
+ PUT SKIP LIST('**** START PROGRAM BDM010M **** ');
+ PUT SKIP LIST('THE PARAMETER IS : ',PARM);
+ PUT SKIP LIST('                                      ');
+ PUT SKIP LIST('THE GENERATED CONTROL CARD LOOKS LIKE:');
+ PUT SKIP LIST('                                      ');
+
+ CALL READ_SETVARS;
+
+ /******************************************************************/
+ /* SUBSTITUTE VARIABLES IN RECORDS                                  */
+ /******************************************************************/
+ EOF_FILEIN         = '0'B;
+ READ FILE (FILEIN) INTO (INREC);
+ DO WHILE (^EOF_FILEIN);
+   OUTREC = INREC;
+   DO I = 1 TO VARCNT WHILE(PARMVAL(I) ^= DUMMY_VAL);
+     START_POS = INDEX(OUTREC,'&'||PARMVAR(I)||'.');
+     IF START_POS ^= 0                   /* RECORD CONTAINS VARIABLE */
+     THEN DO;
+       OUTREC = SUBSTR(OUTREC,1,START_POS-1) ||
+                PARMVAL(I)                   ||
+       SUBSTR(OUTREC,START_POS+VARLEN(I)+2,80-START_POS-VARLEN(I)-1);
+     END;
+   END;
+   PUT SKIP LIST(OUTREC);
+   WRITE FILE (FILEOUT) FROM (OUTREC);
+   READ FILE (FILEIN) INTO (INREC);
+ END;                                      /* DO WHILE (^EOF_FILEIN) */
+
+ /********************************************************************/
+ /*  READ SETVARS FROM CNTLIN FILE                                   */
+ /*    WE ASSUME THAT THE VALUE IS ENCLOSED BY QUOTES                */
+ /********************************************************************/
+ READ_SETVARS: PROC;
+
+   VARCNT     = 7;
+   PARMVAR(1) = 'DATAQ';
+   PARMVAR(2) = 'SYS';
+   PARMVAR(3) = 'FTPQ';
+   PARMVAR(4) = 'UNLQ';
+   PARMVAR(5) = 'STRM';
+   PARMVAR(6) = 'BDMQ';
+   PARMVAR(7) = 'DRPFX';
+   PARMVAL(1) = DUMMY_VAL;
+   PARMVAL(2) = DUMMY_VAL;
+   PARMVAL(3) = DUMMY_VAL;
+   PARMVAL(4) = DUMMY_VAL;
+   PARMVAL(5) = DUMMY_VAL;
+   PARMVAL(6) = DUMMY_VAL;
+   PARMVAL(7) = DUMMY_VAL;
+   VARLEN(1)  = 5;
+   VARLEN(2)  = 3;
+   VARLEN(3)  = 4;
+   VARLEN(4)  = 4;
+   VARLEN(5)  = 4;
+   VARLEN(6)  = 4;
+   VARLEN(7)  = 5;
+   EOF_CNTLIN = '0'B;
+
+   READ FILE (CNTLIN) INTO (CNTLREC);
+   DO WHILE (^EOF_CNTLIN);
+     DO I = 1 TO VARCNT;
+       START_POS = INDEX(CNTLREC,' '||PARMVAR(I)||'=');
+       IF START_POS ^= 0                 /* RECORD CONTAINS VARIABLE */
+       THEN DO;
+         CNTLREC = SUBSTR(CNTLREC,START_POS + 3 + VARLEN(I));
+         QUOTE_POS = INDEX(CNTLREC,'''');     /* POSITION LAST QUOTE */
+         IF QUOTE_POS > 0
+         THEN PARMVAL(I) = SUBSTR(CNTLREC,1,QUOTE_POS-1);
+       END;
+     END;
+     READ FILE (CNTLIN) INTO (CNTLREC);
+   END;
+
+ END READ_SETVARS;
+
+ /********************************************************************/
+ /*   END OF PROGRAM                                                 */
+ /********************************************************************/
+ END_OF_PROG:
+
+ /********************************************************************/
+ /*   CLOSE FILES                                                    */
+ /********************************************************************/
+ CLOSE FILE(FILEIN);
+ CLOSE FILE(CNTLIN);
+ CLOSE FILE(FILEOUT);
+
+ PUT SKIP LIST('                                      ');
+ PUT SKIP LIST('**** END   PROGRAM BDM010M **** ');
+
+ %INCLUDE BDM5MHH9;              /* FINISH THE MESSAGEHANDLER        */
+
+ CALL PLIRETC(PLIRET);           /* INFORM PL/I ABOUT THE RETURNCODE */
+ RETURN;
+
+
+ END BDM010M;

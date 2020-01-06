@@ -1,0 +1,96 @@
+ DCL 1 HEADER1,                                                         00010000
+       3 FILL01               CHAR(09)   INIT                           00020000
+       ('RECONID:'),                                                    00030000
+       3 RECON_ID             CHAR(10),                                 00040000
+       3 FILL02               CHAR(11)   INIT(''),                      00050000
+       3 FILL03               CHAR(40)   INIT                           00060000
+       ('BHFDM AUTO-RECONCILIATION REPORT'),                            00070000
+       3 FILL04               CHAR(10)   INIT('');                      00080000
+                                                                        00090000
+ DCL 1 HEADER2,                                                         00100000
+       3 FILL01               CHAR(12)   INIT                           00110000
+       ('RECON SCOPE:'),                                                00120000
+       3 SCOPE                CHAR(10),                                 00130000
+       3 FILL02               CHAR(08)   INIT(''),                      00140003
+       3 FILL03               CHAR(07)   INIT                           00150000
+       ('TITLE: '),                                                     00160000
+       3 TITLE                CHAR(40),                                 00170003
+       3 FILL04               CHAR(03)   INIT('');                      00180002
+                                                                        00190000
+ DCL 1 HEADER3,                                                         00200000
+       3 FILL01               CHAR(30)   INIT(''),                      00210000
+       3 FILL02               CHAR(50)   INIT                           00220000
+       ('*****  IBM CONFIDENTIAL  *****');                              00230000
+                                                                        00240000
+ DCL 1 HEADER4,                                                         00241000
+       3 FILL01               CHAR(17)   INIT                           00242000
+       ('BHFDM REF TABLE: '),                                           00243003
+       3 TABLE_NAME           CHAR(29),                                 00244000
+       3 FILL02               CHAR(34)   INIT('');                      00245000
+                                                                        00246000
+ DCL 1 HEADER5,                                                         00247000
+       3 FILL01               CHAR(17)   INIT                           00248000
+       ('AIW       TABLE: '),                                           00249003
+       3 TABLE_NAME           CHAR(29),                                 00250000
+       3 FILL02               CHAR(34)   INIT('');                      00251000
+                                                                        00252000
+ DCL 1 HEADER6,                                                         00253000
+       3 FILL01               CHAR(06)   INIT                           00254000
+       ('DATE: '),                                                      00255000
+       3 DATE                 CHAR(10),                                 00256000
+       3 FILL02               CHAR(64)   INIT('');                      00257000
+                                                                        00258000
+ DCL 1 HEADER7,                                                         00259000
+       3 FILL01               CHAR(06)   INIT                           00260000
+       ('TIME: '),                                                      00270000
+       3 TIME                 CHAR(10),                                 00280000
+       3 FILL02               CHAR(64)   INIT('');                      00290000
+                                                                        00300000
+ DCL 1 HEADER8,                                                         00310000
+       3 FILL01               CHAR(18)   INIT                           00320000
+       ('BHFDM TABLE COUNT '),                                          00330003
+       3 FILE1                CHAR(07) INIT(' '),                       00340000
+       3 FILL02               CHAR(18)   INIT                           00350000
+       ('AIW   TABLE COUNT '),                                          00360003
+       3 FILE2                CHAR(07) INIT(' '),                       00370000
+       3 RECON_RESULT         CHAR(20)   INIT                           00380000
+       ('RECON RESULT        '),                                        00390000
+       3 FILE3                CHAR(10) INIT(' ');                       00400000
+                                                                        00410000
+ DCL 1 HEADER9,                                                         00420000
+       3 FILL01               CHAR(18)   INIT                           00430000
+       ('------------------------ '),                                   00440000
+       3 FILE1                CHAR(07) INIT(' '),                       00450000
+       3 FILL02               CHAR(18)   INIT                           00460000
+       ('------------------------ '),                                   00470000
+       3 FILE2                CHAR(07) INIT(' '),                       00480000
+       3 FILL03               CHAR(20)   INIT                           00490000
+       ('------------------- '),                                        00500000
+       3 FILL04               CHAR(10) INIT(' ');                       00510000
+                                                                        00520000
+ DCL 1 DATA1,                                                           00530000
+       3 RECON_COUNT1         PIC'ZZZ,ZZZ,ZZ9',                         00540004
+       3 FILL01               CHAR(14) INIT(' '),                       00550000
+       3 RECON_COUNT2         PIC'ZZZ,ZZZ,ZZ9',                         00560004
+       3 FILL02               CHAR(14) INIT(' '),                       00570000
+       3 RECON_RESULT         CHAR(20)   INIT(' '),                     00580000
+       3 FILL03               CHAR(10) INIT(' ');                       00590000
+                                                                        00600000
+ DCL 1 FOOTER1,                                                         00610000
+       3 FILL01               CHAR(18)   INIT                           00620000
+       ('------------------------ '),                                   00630000
+       3 FILE1                CHAR(07) INIT(' '),                       00640000
+       3 FILL02               CHAR(18)   INIT                           00650000
+       ('------------------------ '),                                   00660000
+       3 FILE2                CHAR(07) INIT(' '),                       00670000
+       3 FILL03               CHAR(20)   INIT                           00680000
+       ('------------------- '),                                        00690000
+       3 FILL04               CHAR(10) INIT(' ');                       00700000
+                                                                        00710000
+ DCL 1 FOOTER2,                                                         00720000
+       3 FILL01               CHAR(30)   INIT(''),                      00730000
+       3 FILL02               CHAR(50)   INIT                           00740000
+       ('END OF REPORT');                                               00750000
+                                                                        00760000
+ DCL 1 BLANK_LINE,                                                      00770000
+       3 FILL01               CHAR(80)   INIT('');                      00780000

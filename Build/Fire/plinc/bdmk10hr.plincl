@@ -1,0 +1,144 @@
+ DCL 1 HEADER1,                                                         00010000
+       3 FILL01               CHAR(09)   INIT                           00020000
+       ('RECONID:'),                                                    00030000
+       3 RECON_ID             CHAR(10),                                 00040000
+       3 FILL02               CHAR(11)   INIT(''),                      00050000
+       3 FILL03               CHAR(41)   INIT                           00060002
+       ('BHFDM AUTO-RECONCILIATION REPORT'),                            00070000
+       3 FILL04               CHAR(104)  INIT('');                      00080010
+                                                                        00090000
+ DCL 1 HEADER2,                                                         00100000
+       3 FILL01               CHAR(12)   INIT                           00101000
+       ('RECON SCOPE:'),                                                00102000
+       3 RECON_SCOPE_ID       CHAR(02),                                 00103000
+       3 SCOPE                CHAR(08),                                 00103100
+       3 FILL02               CHAR(08)   INIT(''),                      00103200
+       3 FILL03               CHAR(07)   INIT                           00103300
+       ('TITLE: '),                                                     00103400
+       3 TITLE                CHAR(60),                                 00103500
+       3 FILL04               CHAR(78)   INIT('');                      00103607
+                                                                        00103700
+ DCL 1 HEADER3,                                                         00103800
+       3 FILL01               CHAR(30)   INIT(''),                      00103900
+       3 FILL02               CHAR(102)  INIT                           00104000
+       ('*****  IBM CONFIDENTIAL  *****'),                              00105010
+       3 FILL03               CHAR(43)   INIT('');                      00105110
+                                                                        00106000
+ DCL 1 HEADER4,                                                         00107000
+       3 FILL01               CHAR(06)   INIT                           00108000
+       ('DATE: '),                                                      00109000
+       3 DATE                 CHAR(10),                                 00110000
+       3 FILL02               CHAR(159)  INIT('');                      00120007
+                                                                        00130000
+ DCL 1 HEADER5,                                                         00140000
+       3 FILL01               CHAR(06)   INIT                           00150000
+       ('TIME: '),                                                      00160000
+       3 TIME                 CHAR(10),                                 00170000
+       3 FILL02               CHAR(159)  INIT('');                      00180007
+                                                                        00190000
+ DCL 1 HEADER6,                                                         00200000
+       3 FILL01               CHAR(41)   INIT                           00210000
+       ('RECONCILIATION KEY'),                                          00220000
+       3 FILL02               CHAR(60)   INIT(''),                      00221008
+       3 FILL03               CHAR(08)   INIT                           00230010
+       ('AMOUNT   '),                                                   00240008
+       3 FILE1                CHAR(22),                                 00250000
+       3 FILE2                CHAR(22),                                 00260000
+       3 FILL04               CHAR(22)   INIT                           00280009
+       ('                DELTA ');                                      00290011
+                                                                        00300000
+ DCL 1 HEADER7,                                                         00310000
+       3 RECON_KEY            CHAR(41),                                 00320008
+       3 FILL01               CHAR(82)   INIT(''),                      00330011
+       3 FILL02               CHAR(22)   INIT('(FILE1)'),               00340000
+       3 FILL03               CHAR(07)   INIT('(FILE2)'),               00350000
+       3 FILL04               CHAR(23)   INIT('');                      00360011
+                                                                        00370000
+ DCL 1 HEADER8,                                                         00380000
+       3 RECON_KEY            CHAR(41),                                 00390000
+       3 FILL01               CHAR(134)   INIT('');                     00400007
+                                                                        00410000
+ DCL 1 HEADER9,                                                         00411000
+       3 RECON_KEY            CHAR(41),                                 00412000
+       3 FILL01               CHAR(134)   INIT('');                     00413007
+                                                                        00414000
+ DCL 1 HEADER10,                                                        00415000
+       3 RECON_KEY            CHAR(41),                                 00416000
+       3 FILL01               CHAR(134)   INIT('');                     00417007
+                                                                        00418000
+ DCL 1 HEADER11,                                                        00419000
+       3 RECON_KEY            CHAR(41),                                 00419100
+       3 FILL01               CHAR(134)   INIT('');                     00419207
+                                                                        00419300
+ DCL 1 HEADER12,                                                        00420000
+       3 FILL01               CHAR(100)  INIT((100)'-'),                00430007
+       3 FILL02               CHAR(1)    INIT(' '),                     00441009
+       3 FILL03               CHAR(08)   INIT((8)'-'),                  00450007
+       3 FILL04               CHAR(22)   INIT                           00470007
+       (' ----------------------'),                                     00480007
+       3 FILL05               CHAR(22)   INIT                           00490007
+       (' ----------------------'),                                     00491007
+       3 FILL06               CHAR(22)   INIT                           00510010
+       (' ----------------------');                                     00511010
+                                                                        00530000
+ DCL 1 DATA1,                                                           00540000
+       3 RECON_KEY            CHAR(100),                                00550001
+       3 FILL01               CHAR(01)   INIT(''),                      00600009
+       3 AMOUNT               CHAR(08),                                 00613006
+       3 AMT1                 PIC'BBZZZZ,ZZZ,ZZZ,ZZ9.V99-',             00614001
+       3 AMT2                 PIC'BBZZZZ,ZZZ,ZZZ,ZZ9.V99-',             00615001
+       3 DELTA                PIC'BBZZZZ,ZZZ,ZZZ,ZZ9.V99-';             00616010
+                                                                        00618001
+ DCL 1 FOOTER1,                                                         00620000
+       3 FILL01               CHAR(100)  INIT((100)'-'),                00621007
+       3 FILL02               CHAR(1)    INIT(' '),                     00622009
+       3 FILL03               CHAR(08)   INIT((8)'-'),                  00624007
+       3 FILL04               CHAR(22)   INIT                           00625007
+       (' ----------------------'),                                     00626007
+       3 FILL05               CHAR(22)   INIT                           00627007
+       (' ----------------------'),                                     00628007
+       3 FILL06               CHAR(22)   INIT                           00629010
+       (' ----------------------');                                     00629110
+                                                                        00730000
+ DCL 1 FOOTER2,                                                         00740000
+       3 FILL01               CHAR(15)   INIT                           00750012
+       ('TOTAL RECORDS: '),                                             00760012
+       3 TOTAL_RECS           PIC'ZZZZZZZZ9',                           00770000
+       3 FILL02               CHAR(110)  INIT(''),                      00780012
+       3 FILL03               CHAR(12)   INIT                           00790000
+       ('TOTAL DELTA '),                                                00800000
+       3 AMOUNT               CHAR(06),                                 00810000
+       3 FILL04               CHAR(01)   INIT                           00820000
+       (':'),                                                           00830000
+       3 DELTA                PIC'BBZZZZ,ZZZ,ZZZ,ZZ9.V99-';             00840012
+                                                                        00860000
+ DCL 1 FOOTER3,                                                         00870000
+       3 FILL01               CHAR(134)  INIT(''),                      00880012
+       3 FILL02               CHAR(12)   INIT                           00890000
+       ('TOTAL DELTA '),                                                00900000
+       3 AMOUNT               CHAR(06),                                 00910000
+       3 FILL03               CHAR(01)   INIT                           00920000
+       (':'),                                                           00930000
+       3 DELTA                PIC'BBZZZZ,ZZZ,ZZZ,ZZ9.V99-';             00940012
+                                                                        00960000
+ DCL 1 FOOTER4,                                                         00970000
+       3 FILL01               CHAR(30)   INIT(''),                      00980000
+       3 FILL02               CHAR(145)  INIT                           00990008
+       ('END OF REPORT');                                               01000000
+                                                                        01010000
+                                                                        01020000
+ DCL 1 BLANK_LINE,                                                      01030000
+       3 FILL01               CHAR(175)  INIT('');                      01040007
+                                                                        01050000
+ DCL 1 OVERFLOW_OVERRIDE      BASED(OVFL_PTR),                          01060000
+       3 FILL01               CHAR(109),                                01070000
+       3 OVFL_IND             CHAR(05),                                 01080000
+       3 FILL02               CHAR(61);                                 01090010
+                                                                        01100000
+ DCL OVFL_PTR                 POINTER;                                  01110000
+                                                                        01120000
+ DCL 1 FOOTER_ZERO,                                                     01130000
+       3 FILL01               CHAR(175)  INIT                           01140007
+       ('TOTAL RECORDS: 0');                                            01150000
+                                                                        01160000
+                                                                        01170000
