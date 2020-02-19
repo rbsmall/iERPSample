@@ -7,6 +7,8 @@
 *.cbl zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 *.bms zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 *.pli zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.plinc zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
+*.plincl zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 *.mfs zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 *.bnd zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
 *.lnk zos-working-tree-encoding=ibm-1047 git-encoding=utf-8
